@@ -52,13 +52,6 @@ func New[T any](inputChannel chan T) *Observable[T] {
 
 }
 
-//func s() {
-//	o := New(make(chan int))
-//	for subsValue := range o.Subscribe().SubscriptionCh {
-//
-//	}
-//}
-
 func (o *Observable[T]) unsubscribe(id int) {
 	o.mut.Lock()
 	defer o.mut.Unlock()
@@ -68,7 +61,6 @@ func (o *Observable[T]) unsubscribe(id int) {
 	o.countOfSubscribers -= 1
 }
 func (o *Observable[T]) Subscribe() *Subscription[T] {
-	println("subscribe")
 	o.countOfSubscribers += 1
 	println(o.countOfSubscribers)
 	newSubscription := &Subscription[T]{
